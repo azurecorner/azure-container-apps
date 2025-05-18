@@ -8,3 +8,13 @@
 /src/container-apps/WebApi/obj
 /src/container-apps/WebApp/bin
 /src/container-apps/WebApp/obj
+/src/WeatherForecastApp/.vs
+/src/WeatherForecastApp/obj/Debug
+/src/WeatherForecastApp/WeatherForecast.Database/bin/Debug
+/src/WeatherForecastApp/WeatherForecast.Database/obj/Debug
+/src/WeatherForecastApp/WeatherForecast.Infrastructure/bin/Debug/net9.0
+/src/WeatherForecastApp/WeatherForecast.Infrastructure/obj
+/src/WeatherForecastApp/WeatherForecast.WebApi/bin/Debug/net9.0
+/src/WeatherForecastApp/WeatherForecast.WebApp/bin/Debug/net9.0
+/src/WeatherForecastApp/WeatherForecast.WebApi/obj
+/src/WeatherForecastApp/WeatherForecast.WebApp/obj
