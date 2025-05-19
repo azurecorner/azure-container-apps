@@ -1,6 +1,6 @@
 # azure-container-apps
 
-# deploy
+# deploy infrastructure
 
 $subscriptionId= (Get-AzContext).Subscription.id 
 
@@ -12,7 +12,7 @@ New-AzResourceGroup -Name $resourceGroupName -Location "francecentral"
  
 New-AzResourceGroupDeployment -Name "container-apps-001" -ResourceGroupName $resourceGroupName -TemplateFile bicep/main.bicep -TemplateParameterFile bicep/main.bicepparam -DeploymentDebugLogLevel All
 
-# 
+# build and deploy apps to container registry
 $acrName="acrdatasynchro"
 az acr login --name $acrName
 
@@ -24,11 +24,13 @@ docker build -t "$acrName.azurecr.io/weatherforecast-web-app:latest" .\src\Weath
 
 docker push "$acrName.azurecr.io/weatherforecast-web-app:latest"
 
-#
+# deploy container apps
 
 New-AzResourceGroupDeployment -Name "container-apps-001" -ResourceGroupName $resourceGroupName -TemplateFile bicep/main.bicep -TemplateParameterFile bicep/main.bicepparam -deployApps $true -DeploymentDebugLogLevel All
 
 # test
+
+# create sql server tables
 
 CREATE TABLE [dbo].[Location] (
     [Id]                   INT            IDENTITY (1, 1) NOT NULL,
@@ -63,11 +65,9 @@ CREATE TABLE [dbo].[Weather] (
 
 
 
-# 
+# see logs
 
 az containerapp show --name dayasync-weatherforecast-api  --resource-group RG-CONTAINER-APPS
-
-
 
 
 az containerapp show \
