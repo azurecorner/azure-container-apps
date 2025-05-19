@@ -18,3 +18,6 @@
 /src/WeatherForecastApp/WeatherForecast.WebApp/bin/Debug/net9.0
 /src/WeatherForecastApp/WeatherForecast.WebApi/obj
 /src/WeatherForecastApp/WeatherForecast.WebApp/obj
+/src/WeatherForecastApp/obj/Docker
+*.dbmdl
+/src/WeatherForecastApp/WeatherForecast.Database/WeatherForecast.Database.jfm
