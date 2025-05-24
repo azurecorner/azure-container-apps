@@ -185,6 +185,13 @@ These tables are typically used to store historical and real-time weather data b
 
 This section outlines how to inspect the deployment status and logs of your Azure Container App named `dayasync-weatherforecast-api` within the resource group `RG-CONTAINER-APPS`.
 
+![CONTAINER ENV](https://github.com/user-attachments/assets/f6a5db20-66b3-4fb8-a5c9-cb6a72d0e0f0)
+
+![ACA FRONT](https://github.com/user-attachments/assets/28d0fb53-5dc8-479b-a7df-f0d7629287e9)
+
+![WEBAPP](https://github.com/user-attachments/assets/827fafda-5606-42e2-84a9-a281b03fb54b)
+
+
 ---
 
 ## 1. View Container App Details
