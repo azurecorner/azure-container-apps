@@ -1,11 +1,39 @@
 # azure-container-apps
 
-# deploy infrastructure
+Azure Container Apps is a serverless platform that simplifies the deployment of containerized applications. It helps reduce infrastructure management and costs by eliminating the need to handle server configuration, container orchestration, and deployment details. Container Apps automatically provides the necessary, up-to-date server resources to ensure your applications remain stable and secure.
 
-$subscriptionId= (Get-AzContext).Subscription.id 
+To learn more, visit the official documentation: [Azure Container Apps Overview](https://learn.microsoft.com/en-us/azure/container-apps/overview)
 
-az account set --subscription $subscriptionId 
+## Tutorial Overview
 
+In this tutorial, we’ll guide you through the process of getting started with Azure Container Apps. We’ll create a **public-facing frontend application** that connects to a **private web app**, which in turn **queries or inserts data into a SQL Server database**. The entire setup will be **fully automated using Azure Bicep**.
+
+## Deploy Infrastructure
+
+This guide explains how to deploy Azure infrastructure for Container Apps using PowerShell and Bicep.
+
+---
+
+## Prerequisites
+
+- Azure CLI and Azure PowerShell must be installed.
+- You must be signed in to your Azure account (`az login`).
+- Bicep templates (`main.bicep` and `main.bicepparam`) should be available in the `bicep/` folder.
+
+---
+
+## Step 1: Set the Azure Subscription
+
+Retrieve the current subscription ID and set it as the active subscription:
+
+```powershell
+$subscriptionId = (Get-AzContext).Subscription.Id
+az account set --subscription $subscriptionId
+
+```
+
+
+# ###########################################
 $resourceGroupName="RG-CONTAINER-APPS"
 
 New-AzResourceGroup -Name $resourceGroupName -Location "francecentral" 
