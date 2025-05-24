@@ -19,6 +19,9 @@ Additionally, we’ll integrate **Azure Application Insights** and **Azure Key V
 - `law-shared-key`   
 - `sqlserver-connectionstring`
 
+  ![Architecture drawio](https://github.com/user-attachments/assets/0231e585-fba5-4052-879d-0e193e61c64a)
+
+
 
 ## Deploy Infrastructure
 
