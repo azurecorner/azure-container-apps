@@ -21,3 +21,4 @@
 /src/WeatherForecastApp/obj/Docker
 *.dbmdl
 /src/WeatherForecastApp/WeatherForecast.Database/WeatherForecast.Database.jfm
+/src/WeatherForecastApp/WeatherForecast.Observability/obj

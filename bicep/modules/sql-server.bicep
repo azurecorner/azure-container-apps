@@ -53,3 +53,6 @@ resource sqlserverConnectionstring 'Microsoft.KeyVault/vaults/secrets@2023-07-01
     value: 'Server=tcp:${sqlServerName}.database.windows.net,1433;Initial Catalog=${databaseName};Persist Security Info=False;User ID=logcorner;Password=${adminPassword};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
   }
 }
+
+
+output sqlServerName string = sqlServer.name

@@ -7,5 +7,7 @@ namespace LogisticManagement.Infrastructure.Repositories
         Task Add(Location item, ICollection<Weather> weather);
 
         Task<IEnumerable<Location>> GetAll();
+
+        Task<Location?> Get(int locationId);
     }
 }

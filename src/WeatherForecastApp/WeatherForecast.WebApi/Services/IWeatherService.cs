@@ -8,5 +8,7 @@ namespace WeatherForecast.WebApi.Services
         Task Add(WeatherForecastForCreationDto weatherDto);
 
         Task<List<WeatherForecastInListDto>> Get();
+
+        Task<WeatherForecastInListDto> Get(int locationId);
     }
 }

@@ -20,7 +20,7 @@ docker build -t "$acrName.azurecr.io/weatherforecast-web-api:latest" .\src\Weath
 
 docker push "$acrName.azurecr.io/weatherforecast-web-api:latest"
 
-docker build -t "$acrName.azurecr.io/weatherforecast-web-app:latest" .\src\WeatherForecastApp -f .\src\WeatherForecastAppWeatherForecast.WebApp\Dockerfile --no-cache
+docker build -t "$acrName.azurecr.io/weatherforecast-web-app:latest" .\src\WeatherForecastApp -f .\src\WeatherForecastApp\WeatherForecast.WebApp\Dockerfile --no-cache
 
 docker push "$acrName.azurecr.io/weatherforecast-web-app:latest"
 

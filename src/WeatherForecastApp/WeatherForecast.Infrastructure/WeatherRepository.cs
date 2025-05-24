@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using WeatherForecast.Infrastructure.Models;
 
 namespace LogisticManagement.Infrastructure.Repositories
@@ -7,6 +8,8 @@ namespace LogisticManagement.Infrastructure.Repositories
     {
         private WeatherForecastDbContext Context;
 
+
+
         public WeatherRepository(WeatherForecastDbContext context)
         {
             Context = context;
@@ -14,8 +17,6 @@ namespace LogisticManagement.Infrastructure.Repositories
 
         public async Task Add(Location item)
         {
-            // Effectuer l'opération d'ajout dans la base de données
-
             await Context.Location.AddAsync(item);
             await Context.SaveChangesAsync();
         }
@@ -29,19 +30,17 @@ namespace LogisticManagement.Infrastructure.Repositories
 
         public async Task<Location?> GetById(int? departmentCode)
         {
-            // Ensure Context.Location is not null before accessing it
             if (Context.Location == null)
             {
                 throw new InvalidOperationException("The Location DbSet is not initialized.");
             }
 
-            // Return the result, explicitly allowing for a null return value
             return await Context.Location.FirstOrDefaultAsync(x => x.DepartmentCode == departmentCode);
         }
 
         public async Task Add(Location item, ICollection<Weather> weather)
         {
-            // Effectuer l'opération d'ajout dans la base de données
+            
 
             var location = await GetById(item.DepartmentCode);
             if (location == null)
@@ -59,6 +58,18 @@ namespace LogisticManagement.Infrastructure.Repositories
             }
 
             await Context.SaveChangesAsync();
+        }
+
+        public async Task<Location?> Get(int locationId)
+        {
+            if (Context.Location == null)
+            {
+                throw new InvalidOperationException("The Location DbSet is not initialized.");
+            }
+
+            return await Context.Location
+                                .Include(x => x.Weather)
+                                .FirstOrDefaultAsync(x => x.Id == locationId);
         }
     }
 }

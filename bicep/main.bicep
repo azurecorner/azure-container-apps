@@ -34,6 +34,9 @@ param tags object
 param adminUserObjectId string 
 var keyVaultSecretUserRoleId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
 
+param runScript string = loadTextContent('./scrips/run.ps1')
+var createTablesScriptRaw = loadTextContent('./scrips/createTables.sql')
+var createTablesScriptBase64 = base64(createTablesScriptRaw)
 
 module userAssignedIdentity 'modules/user-assigned-managed-identity.bicep' = {
   name: 'user-assigned-managed-identity'
@@ -177,5 +180,22 @@ module sqlserver 'modules/sql-server.bicep' = {
   }
   dependsOn: [
     keyVault
+  ]
+}
+
+
+module deploymentScript 'modules/deployment-script.bicep' = if (!deployApps) {
+  name: 'deployment-script'
+  params: {
+    location: location
+    sqlServerName: '${sqlserver.outputs.sqlServerName}.database.windows.net'
+    databaseName: databaseName
+    sqlAdminUsername: sqlserverAdminLogin
+    sqlAdminPassword: sqlserverAdminPassword
+    runScript: runScript
+    createTablesScriptBase64: createTablesScriptBase64
+  }
+  dependsOn: [
+    sqlserver
   ]
 }
