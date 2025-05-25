@@ -6,7 +6,7 @@ To learn more, visit the official documentation: [Azure Container Apps Overview]
 
 ##  Overview
 
-In this tutorial, we’ll walk you through the process of getting started with **Azure Container Apps**. You’ll create a **public-facing frontend application** that connects to a **private web app**, which then **queries and inserts data into a SQL Server database**. The entire setup will be **fully automated using Azure Bicep**.
+In this tutorial, we’ll walk you through the process of getting started with **Azure Container Apps**. You’ll create a **public-facing frontend application** that connects to a **private web api**, which then **queries and inserts data into a SQL Server database**. The entire setup will be **fully automated using Azure Bicep**.
 
 Additionally, we’ll integrate **Azure Application Insights** and **Azure Key Vault** to securely store and retrieve secrets such as:
 
