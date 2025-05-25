@@ -1,12 +1,10 @@
-# azure-container-apps
+# azure container apps
 
 Azure Container Apps is a serverless platform that simplifies the deployment of containerized applications. It helps reduce infrastructure management and costs by eliminating the need to handle server configuration, container orchestration, and deployment details. Container Apps automatically provides the necessary, up-to-date server resources to ensure your applications remain stable and secure.
 
 To learn more, visit the official documentation: [Azure Container Apps Overview](https://learn.microsoft.com/en-us/azure/container-apps/overview)
 
-## Tutorial Overview
-
-# Azure Container Apps Tutorial
+##  Overview
 
 In this tutorial, we’ll walk you through the process of getting started with **Azure Container Apps**. You’ll create a **public-facing frontend application** that connects to a **private web app**, which then **queries and inserts data into a SQL Server database**. The entire setup will be **fully automated using Azure Bicep**.
 
@@ -23,7 +21,7 @@ Additionally, we’ll integrate **Azure Application Insights** and **Azure Key V
 
 
 
-## Deploy Infrastructure
+# Deploy Infrastructure
 
 This guide explains how to deploy Azure infrastructure for Container Apps using PowerShell and Bicep.
 
@@ -113,11 +111,7 @@ docker build -t "$acrName.azurecr.io/weatherforecast-web-app:latest" `
 docker push "$acrName.azurecr.io/weatherforecast-web-app:latest"
 ```
 
-# ###########################################
-
-
-
-# build and deploy apps to container registry
+# deploy web api and front end container apps 
 
 ## Deploy Infrastructure with App Deployment Enabled
 
@@ -237,5 +231,9 @@ az containerapp show `
 These commands help with monitoring, troubleshooting, and validating the deployment of your Azure Container App.
 
 
+## source code 
+Feel free to play around with the code by checking out the GitHub repo linked below.
+
+https://github.com/azurecorner/azure-container-apps
 
 
