@@ -22,3 +22,4 @@
 *.dbmdl
 /src/WeatherForecastApp/WeatherForecast.Database/WeatherForecast.Database.jfm
 /src/WeatherForecastApp/WeatherForecast.Observability/obj
+/src/WeatherForecastApp/WeatherForecast.Database/WeatherForecast.Database.jfm

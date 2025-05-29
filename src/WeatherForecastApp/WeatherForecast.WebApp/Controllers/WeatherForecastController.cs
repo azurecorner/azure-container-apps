@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using WeatherForecast.Infrastructure.Models;
@@ -12,21 +11,18 @@ namespace WeatherForecast.WebApp.Controllers
     {
         public ILogger<WeatherForecastController> Logger { get; }
 
-            private readonly HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
         private readonly ILogger<WeatherForecastController> _logger;
- 
+
         public WeatherForecastController(IHttpClientFactory clientFactory, ILogger<WeatherForecastController> logger)
         {
             _httpClient = clientFactory.CreateClient("WebApi");
             _logger = logger;
-     
         }
 
         // GET: WeatherForecastController
         public async Task<ActionResult> Index()
         {
-            
-
             try
             {
                 var response = await _httpClient.GetAsync("WeatherForecast");
@@ -53,11 +49,10 @@ namespace WeatherForecast.WebApp.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Exception occurred while fetching weather data.");
-             
+
                 return StatusCode(500, "Internal server error");
             }
         }
-
 
         // GET: WeatherForecastController/Details/Id
         public async Task<ActionResult> Details(int Id)

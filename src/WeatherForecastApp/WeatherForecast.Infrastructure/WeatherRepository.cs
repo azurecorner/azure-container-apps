@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using WeatherForecast.Infrastructure.Models;
 
 namespace LogisticManagement.Infrastructure.Repositories
@@ -7,8 +6,6 @@ namespace LogisticManagement.Infrastructure.Repositories
     public class WeatherRepository : IWeatherRepository
     {
         private WeatherForecastDbContext Context;
-
-
 
         public WeatherRepository(WeatherForecastDbContext context)
         {
@@ -40,8 +37,6 @@ namespace LogisticManagement.Infrastructure.Repositories
 
         public async Task Add(Location item, ICollection<Weather> weather)
         {
-            
-
             var location = await GetById(item.DepartmentCode);
             if (location == null)
             {

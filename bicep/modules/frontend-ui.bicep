@@ -114,22 +114,4 @@ resource frontend 'Microsoft.App/containerApps@2025-01-01' = {
     }
   }
 }
-// resource acrPullRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-//   name: guid(containerRegistry.id, frontend.id, acrPullRoleId)
-//   scope: containerRegistry
-//   properties: {
-//     principalId: frontend.identity.principalId
-//     roleDefinitionId: acrPullRoleId
-//     principalType: 'ServicePrincipal'
-//   }
-// }
 
-// resource keyVaultSecretUserRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-//   name: guid(keyVault.id, frontend.id, keyVaultSecretUserRoleId)
-//   scope: keyVault
-//   properties: {
-//     principalId: frontend.identity.principalId
-//     roleDefinitionId: keyVaultSecretUserRoleId
-//     principalType: 'ServicePrincipal'
-//   }
-// }

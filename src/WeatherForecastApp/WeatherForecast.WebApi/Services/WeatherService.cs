@@ -1,5 +1,4 @@
 ﻿using LogisticManagement.Infrastructure.Repositories;
-using System.Diagnostics;
 using WeatherForecast.WebApi.Models;
 using WeatherForecast.WebApi.Models.Creation;
 using WeatherForecast.WebApi.WeatherForecast.Application.Mappers;
@@ -17,16 +16,12 @@ public class WeatherService : IWeatherService
 
     public async Task Add(WeatherForecastForCreationDto weatherDto)
     {
-        
-
         // Conversion des données du DTO
         var location = weatherDto.ToLocation();
 
-       
-            // Appel à la base de données
-            await WeatherRepository.Add(location, location.Weather);
-        }
-    
+        // Appel à la base de données
+        await WeatherRepository.Add(location, location.Weather);
+    }
 
     public async Task<List<WeatherForecastInListDto>> Get()
     {

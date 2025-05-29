@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddSingleton<ITelemetryInitializer>(new CloudRoleNameTelemetryInitializer("WeatherForecast.WebApi")); 
+builder.Services.AddSingleton<ITelemetryInitializer>(new CloudRoleNameTelemetryInitializer("WeatherForecast.WebApi"));
 builder.Services.AddApplicationInsightsTelemetry(options =>
 {
     options.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];

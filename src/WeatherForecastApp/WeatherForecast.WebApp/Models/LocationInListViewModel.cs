@@ -1,4 +1,4 @@
-﻿namespace  WeatherForecast.WebApp.Models;
+﻿namespace WeatherForecast.WebApp.Models;
 
 using System;
 using System.Collections.Generic;

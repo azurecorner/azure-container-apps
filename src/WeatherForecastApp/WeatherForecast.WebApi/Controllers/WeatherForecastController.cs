@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using System.Text.Json;
 using WeatherForecast.WebApi.Models;
 using WeatherForecast.WebApi.Services;
@@ -10,21 +9,18 @@ namespace WebAppi.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        //  https://api.open-meteo.com/v1/forecast?latitude=48.85&longitude=2.35&current_weather=true
 
         private HttpClient HttpClient;
 
         public IWeatherService WeatherService { get; }
 
         private readonly ILogger<WeatherForecastController> _logger;
-     
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger,  IWeatherService weatherService, HttpClient httpClient)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherService weatherService, HttpClient httpClient)
         {
             _logger = logger;
-                    WeatherService = weatherService;
+            WeatherService = weatherService;
             HttpClient = httpClient;
-    
         }
 
         [HttpPost("{postalCode}")]
@@ -34,10 +30,6 @@ namespace WebAppi.Controllers
         {
             try
             {
-                
-
-               
-
                 if (!ModelState.IsValid)
                     return BadRequest();
 
@@ -64,8 +56,6 @@ namespace WebAppi.Controllers
                     _logger.LogInformation($"Température actuelle à {item.City} : {weatherData.CurrentWeather.Temperature}°C");
 
                     await WeatherService.Add(weatherData);
-
-                   
                 }
                 else
                 {

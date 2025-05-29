@@ -20,7 +20,6 @@ resource runSqlDeployment 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
     forceUpdateTag: '1'
     scriptContent: runScript
 
-    // Pass the Base64-encoded SQL script safely to avoid parsing errors
     arguments: '-sqlServerName "${sqlServerName}" -databaseName "${databaseName}" -sqlAdminUsername "${sqlAdminUsername}" -sqlAdminPassword "${sqlAdminPassword}" -sqlScriptBase64 "${createTablesScriptBase64}"'
   }
 }

@@ -50,9 +50,9 @@ resource acrPullRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(containerRegistry.id, userAssignedIdentityPrincipalId, acrPullRoleId)
   scope: containerRegistry
   properties: {
-    principalId: userAssignedIdentityPrincipalId//userAssignedIdentity.properties.principalId
-    roleDefinitionId: acrPullRoleId
+    principalId: userAssignedIdentityPrincipalId
     principalType: 'ServicePrincipal'
+    roleDefinitionId: acrPullRoleId
   }
 }
 

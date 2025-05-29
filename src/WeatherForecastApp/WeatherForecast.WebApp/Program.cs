@@ -1,4 +1,3 @@
-using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.Extensibility;
 using WeatherForecast.WebApp;
 
@@ -10,23 +9,21 @@ builder.Services.AddHttpClient("WebApi", client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["WEBAPI_URL"] ?? throw new InvalidOperationException("WEBAPI_URL configuration is missing or empty."));
 });
-builder.Services.AddSingleton<ITelemetryInitializer>(new CloudRoleNameTelemetryInitializer("WeatherForecast.WebApp")); 
+builder.Services.AddSingleton<ITelemetryInitializer>(new CloudRoleNameTelemetryInitializer("WeatherForecast.WebApp"));
 
 builder.Services.AddApplicationInsightsTelemetry(options =>
 {
     options.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
 });
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
- app.UseExceptionHandler("/Home/Error");
+app.UseExceptionHandler("/Home/Error");
 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 
 app.UsePathBase("/webapp");
-
 
 app.UseHttpsRedirection();
 app.UseRouting();

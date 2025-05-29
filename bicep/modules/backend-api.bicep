@@ -122,8 +122,7 @@ resource backendApi 'Microsoft.App/containerApps@2025-01-01' = {
   }
   dependsOn: [
     env
-    
-    
+     
   ]
 }
 

@@ -17,5 +17,4 @@
             telemetry.Context.Cloud.RoleName = _roleName;
         }
     }
-
 }
