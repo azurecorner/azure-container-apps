@@ -9,11 +9,6 @@ param logAnalyticsWorkspaceName string = 'law${appName}'
 
 param keyVaultName string = 'kv${appName}'
 
-param deployApps bool 
-
-param backendApiImage string = 'acrdatasynchro.azurecr.io/weatherforecast-web-api:latest'
-param frontendUIImage string = 'acrdatasynchro.azurecr.io/weatherforecast-web-app:latest'
-
 param containerRegistryName string = 'acr${appName}'
 
 param containerEnvironmentName string = 'env${appName}'
@@ -33,10 +28,6 @@ param tags object
 
 param adminUserObjectId string 
 var keyVaultSecretUserRoleId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
-
-param runScript string = loadTextContent('./scrips/run.ps1')
-var createTablesScriptRaw = loadTextContent('./scrips/createTables.sql')
-var createTablesScriptBase64 = base64(createTablesScriptRaw)
 
 module userAssignedIdentity 'modules/user-assigned-managed-identity.bicep' = {
   name: 'user-assigned-managed-identity'
@@ -136,38 +127,6 @@ module appInsights 'modules/app-insights.bicep' = {
 }
 
 
-module backend 'modules/backend-api.bicep' = if (deployApps) {
-  name: 'web-api'
-  params: {
-    containerAppEnvName: containerEnvironment.outputs.containerEnvironmentName
-    containerRegistryName: containerRegistry.outputs.name
-    keyVaultName: keyVault.name
-    location: location
-    tags: tags
-    imageName: backendApiImage
-    userAssignedIdentityName: userAssignedIdentity.outputs.userAssignedIdentityName
-  }
-  dependsOn: [
-
-    appInsights
-  ]
-}
-
-
-module frontend 'modules/frontend-ui.bicep' = if (deployApps) {
-  name: 'web-app'
-  params: {
-    containerAppEnvName: containerEnvironment.outputs.containerEnvironmentName
-    containerRegistryName: containerRegistry.outputs.name
-    keyVaultName: keyVault.name
-    location: location
-    userAssignedIdentityName: userAssignedIdentity.outputs.userAssignedIdentityName
-    tags: tags
-    imageName: frontendUIImage
-    backendFqdn: backend.outputs.fqdn
-  }
-}
-
 module sqlserver 'modules/sql-server.bicep' = {
   name: 'sqlserver'
   params: {
@@ -184,18 +143,3 @@ module sqlserver 'modules/sql-server.bicep' = {
 }
 
 
-module deploymentScript 'modules/deployment-script.bicep' = if (!deployApps) {
-  name: 'deployment-script'
-  params: {
-    location: location
-    sqlServerName: '${sqlserver.outputs.sqlServerName}.database.windows.net'
-    databaseName: databaseName
-    sqlAdminUsername: sqlserverAdminLogin
-    sqlAdminPassword: sqlserverAdminPassword
-    runScript: runScript
-    createTablesScriptBase64: createTablesScriptBase64
-  }
-  dependsOn: [
-    sqlserver
-  ]
-}

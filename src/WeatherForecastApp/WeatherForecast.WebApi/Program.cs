@@ -1,18 +1,23 @@
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.OpenApi.Models;
 using WeatherForecast.Infrastructure;
+using WeatherForecast.WebApi;
 using WeatherForecast.WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var meterName = "OtelReferenceApp.WeatherForecast";
 
+builder.Services.AddSingleton<ITelemetryInitializer>(new CloudRoleNameTelemetryInitializer("WeatherForecast.WebApi")); 
+builder.Services.AddApplicationInsightsTelemetry(options =>
+{
+    options.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
+});
 
 builder.Services.AddScoped<IWeatherService, WeatherService>();
 
 builder.Services.RegisterInfrastureDependencies(builder.Configuration);
 builder.Services.AddHttpClient();
-
 //logging
 
 builder.Services.AddCors(options =>
@@ -24,7 +29,6 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
     });
 });
-
 
 builder.Services.AddControllers();
 
@@ -48,6 +52,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseCors();
 app.MapControllers();
-
 
 app.Run();

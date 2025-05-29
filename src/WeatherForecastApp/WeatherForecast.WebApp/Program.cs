@@ -1,3 +1,7 @@
+using Microsoft.ApplicationInsights.Channel;
+using Microsoft.ApplicationInsights.Extensibility;
+using WeatherForecast.WebApp;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,14 +10,12 @@ builder.Services.AddHttpClient("WebApi", client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["WEBAPI_URL"] ?? throw new InvalidOperationException("WEBAPI_URL configuration is missing or empty."));
 });
+builder.Services.AddSingleton<ITelemetryInitializer>(new CloudRoleNameTelemetryInitializer("WeatherForecast.WebApp")); 
 
-//if (!builder.Environment.IsDevelopment())
-//{
-//    builder.Services.AddDataProtection()
-//             .PersistKeysToFileSystem(new DirectoryInfo(@"/mnt/dataprotectionkeys/"))
-//             .SetApplicationName("WeatherForecastApp");
-
-//}
+builder.Services.AddApplicationInsightsTelemetry(options =>
+{
+    options.ConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
+});
 
 
 var app = builder.Build();
